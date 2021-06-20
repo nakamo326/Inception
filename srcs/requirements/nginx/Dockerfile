@@ -26,10 +26,9 @@ RUN openssl req -newkey rsa:4096 \
     -keyout server.key \
     -subj "/C=JP/ST=tokyo/L=tokyo/O=42tokyo/OU=IT Department/CN=ynakamot"
 
-COPY conf/nginx.conf /etc/nginx/sites-available/default
-RUN chmod +r /etc/nginx/sites-available/default
+COPY conf/nginx.conf /etc/nginx/conf.d/default.conf
+RUN chmod +r /etc/nginx/conf.d/default.conf
 
 EXPOSE 443
-EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
