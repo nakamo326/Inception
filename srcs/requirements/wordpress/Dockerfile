@@ -1,22 +1,19 @@
-FROM debian:buster
-
-WORKDIR /tmp/
+FROM alpine:3.13.5
 
 RUN set -x \
-    && apt-get update \
-    && apt-get install -y \
+    && apk update \
+    && apk --no-cache add \
     php \
     php-fpm \
     php-pdo \
-    php-mysql \
-    vim
+    php7-mysqli
 
-COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
-RUN chmod +r /etc/php/7.3/fpm/pool.d/www.conf
+COPY ./conf/www.conf /etc/php7/php-fpm.d/www.conf
+RUN chmod +r /etc/php7/php-fpm.d/www.conf
 
 RUN mkdir /run/php/
 
 EXPOSE 9000
 EXPOSE 3306
 
-CMD [ "php-fpm7.3", "-F", "-R" ]
+CMD [ "php-fpm7", "-F", "-R" ]
