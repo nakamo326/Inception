@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 services:
     nginx:
         build:
@@ -7,7 +7,6 @@ services:
         depends_on:
             - wordpress
         ports:
-            #- "8080:80"
             - "443:443"
         volumes:
             - ./requirements/wordpress/wp_site:/var/www/html
@@ -15,5 +14,14 @@ services:
         build:
             context: ./requirements/wordpress
         container_name: wordpress
+        depends_on:
+            - mariadb
         volumes:
             - ./requirements/wordpress/wp_site:/var/www/html
+    mariadb:
+        build:
+            context: ./requirements/mariadb
+        init: True
+        container_name: mariadb
+        # volumes:
+        #     - ./requirements/mariadb/db:/var/lib/mysql

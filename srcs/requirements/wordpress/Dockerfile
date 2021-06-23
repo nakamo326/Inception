@@ -8,6 +8,7 @@ RUN set -x \
     php \
     php-fpm \
     php-pdo \
+    php-mysql \
     vim
 
 COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
