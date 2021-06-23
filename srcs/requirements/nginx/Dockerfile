@@ -29,6 +29,6 @@ RUN openssl req -newkey rsa:4096 \
 COPY conf/nginx.conf /etc/nginx/conf.d/default.conf
 RUN chmod +r /etc/nginx/conf.d/default.conf
 
-EXPOSE 443
+EXPOSE 9000
 
 CMD ["nginx", "-g", "daemon off;"]

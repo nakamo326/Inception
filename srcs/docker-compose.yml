@@ -4,6 +4,16 @@ services:
         build:
             context: ./requirements/nginx
         container_name: nginx
+        depends_on:
+            - wordpress
         ports:
             #- "8080:80"
             - "443:443"
+        volumes:
+            - ./requirements/wordpress/wp_site:/var/www/html
+    wordpress:
+        build:
+            context: ./requirements/wordpress
+        container_name: wordpress
+        volumes:
+            - ./requirements/wordpress/wp_site:/var/www/html
