@@ -12,7 +12,7 @@ $(NAME):
 down:
 	docker-compose -f $(YML) down
 
-set_up: volume add_host #extract_wp
+set_up: volume add_host extract_wp
 	docker-compose -f $(YML) up -d --build
 
 volume:
@@ -27,7 +27,6 @@ extract_wp:
 	unzip wp_site.zip
 	cp -r wordpress/* /home/ynakamot/data/wordpress
 	rm -rf wp_site.zip wordpress
-	cp srcs/requirements/wordpress/conf/wp-config.php /home/ynakamot/data/wordpress/wp-config.php
 
 clean:
 

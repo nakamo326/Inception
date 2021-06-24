@@ -21,6 +21,10 @@ services:
             context: ./requirements/wordpress
         container_name: wordpress
         restart: always
+        environment:
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         depends_on:
             - mariadb
         networks:

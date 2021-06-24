@@ -26,13 +26,13 @@
 
 // ** MySQL 設定 - この情報はホスティング先から入手してください。 ** //
 /** WordPress のためのデータベース名 */
-define( 'DB_NAME', 'wordpress_db' );
+define( 'DB_NAME', '$MYSQL_DATABASE' );
 
 /** MySQL データベースのユーザー名 */
-define( 'DB_USER', 'wordpress_user' );
+define( 'DB_USER', '$MYSQL_USER' );
 
 /** MySQL データベースのパスワード */
-define( 'DB_PASSWORD', 'wordpress_pass' );
+define( 'DB_PASSWORD', '$MYSQL_PASSWORD' );
 
 /** MySQL のホスト名 */
 define( 'DB_HOST', 'mariadb' );
@@ -69,7 +69,7 @@ define( 'NONCE_SALT',       'put your unique phrase here' );
  * それぞれにユニーク (一意) な接頭辞を与えることで一つのデータベースに複数の WordPress を
  * インストールすることができます。半角英数字と下線のみを使用してください。
  */
-$table_prefix = 'wp_';
+\$table_prefix = 'wp_';
 
 /**
  * 開発者へ: WordPress デバッグモード

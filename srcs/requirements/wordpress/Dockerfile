@@ -12,11 +12,15 @@ RUN set -x \
     && rm -f /var/cache/apk/*
 
 COPY ./conf/www.conf /etc/php7/php-fpm.d/www.conf
-RUN chmod +r /etc/php7/php-fpm.d/www.conf
 COPY ./conf/php.ini /etc/php7/php.ini
-RUN chmod +r /etc/php7/php.ini
+COPY ./conf/wp-conf-tmpl.php /tmp/wp-conf-tmpl.php
+COPY ./conf/run.sh /scripts/run.sh
+RUN chmod +r /etc/php7/php-fpm.d/www.conf \
+    && chmod +r /etc/php7/php.ini \
+    && chmod +r /tmp/wp-conf-tmpl.php \
+    && chmod -R 755 /scripts
 
 EXPOSE 9000
 EXPOSE 3306
 
-CMD [ "php-fpm7", "-F", "-R" ]
+CMD [ "/scripts/run.sh" ]
