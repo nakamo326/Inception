@@ -1,9 +1,9 @@
 #! /bin/sh
 
-# create run directory
-mkdir -p /run/mysqld
+if [ ! -d "/run/mysqld" ]; then
+	mkdir -p /run/mysqld
+fi
 chown -R mysql:mysql /run/mysqld
-
 
 mysql_install_db --user=mysql --ldata=/var/lib/mysql > /dev/null
 
@@ -14,8 +14,8 @@ GRANT ALL ON *.* TO 'root'@'%' identified by '$MYSQL_ROOT_PASSWORD' WITH GRANT O
 GRANT ALL ON *.* TO 'root'@'localhost' identified by '$MYSQL_ROOT_PASSWORD' WITH GRANT OPTION ;
 SET PASSWORD FOR 'root'@'localhost'=PASSWORD('${MYSQL_ROOT_PASSWORD}') ;
 DROP DATABASE IF EXISTS test ;
-CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\` CHARACTER SET $MYSQL_CHARSET COLLATE $MYSQL_COLLATION;
-GRANT ALL ON \`$MYSQL_DATABASE\`.* to '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';
+CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE CHARACTER SET $MYSQL_CHARSET COLLATE $MYSQL_COLLATION;
+GRANT ALL ON $MYSQL_DATABASE.* to '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';
 FLUSH PRIVILEGES ;
 EOF
 

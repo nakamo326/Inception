@@ -13,4 +13,4 @@ RUN chmod -R 755 /scripts
 
 EXPOSE 3306
 
-CMD [ "/scripts/run.sh" ]
+ENTRYPOINT [ "/scripts/run.sh" ]

@@ -20,9 +20,8 @@ RUN openssl req -newkey rsa:4096 \
     -subj "/C=JP/ST=tokyo/L=tokyo/O=42tokyo/OU=IT Department/CN=ynakamot"
 
 COPY conf/nginx.conf /etc/nginx/conf.d/default.conf
-RUN chmod +r /etc/nginx/conf.d/default.conf
-
-RUN mkdir /run/nginx
+RUN chmod +r /etc/nginx/conf.d/default.conf \
+    && mkdir /run/nginx
 
 EXPOSE 9000
 
