@@ -11,7 +11,9 @@ services:
             - wordpress
         ports:
             - "443:443"
-        volumes:
+        networks:
+            - network
+        volumes: #need to change /home/login/data
             - ./requirements/wordpress/wp_site:/var/www/html
 
     wordpress:
@@ -21,7 +23,9 @@ services:
         restart: always
         depends_on:
             - mariadb
-        volumes:
+        networks:
+            - network
+        volumes: #need to change /home/login/data
             - ./requirements/wordpress/wp_site:/var/www/html
 
     mariadb:
@@ -36,5 +40,11 @@ services:
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
             MYSQL_CHARSET: ${MYSQL_CHARSET}
             MYSQL_COLLATION: ${MYSQL_COLLATION}
-        volumes:
+        networks:
+            - network
+        volumes: #need to change /home/login/data
             - ./requirements/mariadb/db:/var/lib/mysql
+
+networks:
+    network:
+        driver: bridge
