@@ -1,23 +1,16 @@
 FROM alpine:3.13.5
 
-WORKDIR /tmp/
-
-
 RUN set -x \
     && apk update \
     && apk add --no-cache \
     mariadb \
     mariadb-client \
-    tini
+    mariadb-server-utils \
+    && rm -f /var/cache/apk/*
 
-COPY ./conf/init.sql /tmp/init.sql
+COPY ./conf/run.sh /scripts/run.sh
+RUN chmod -R 755 /scripts
 
-# RUN service mysql start \
-    # && mysql -u root < init.sql
+EXPOSE 3306
 
-# EXPOSE 3306
-
-# ENTRYPOINT ["/usr/bin/tini", "--"]
-
-# CMD [ "mysqld_safe" ]
-#CMD [ "service", "mysql", "start" ]
+CMD [ "/scripts/run.sh" ]

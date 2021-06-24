@@ -25,5 +25,12 @@ services:
             context: ./requirements/mariadb
         container_name: mariadb
         hostname: mariadb
-        # volumes:
-        #     - ./requirements/mariadb/db:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_CHARSET: ${MYSQL_CHARSET}
+            MYSQL_COLLATION: ${MYSQL_COLLATION}
+        volumes:
+            - ./requirements/mariadb/db:/var/lib/mysql

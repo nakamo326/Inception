@@ -6,7 +6,8 @@ RUN set -x \
     && apk update \
     && apk add --no-cache \
     nginx \
-    openssl
+    openssl \
+    && rm -f /var/cache/apk/*
 
 #make self-signed ssl
 RUN openssl req -newkey rsa:4096 \
