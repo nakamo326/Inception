@@ -2,16 +2,15 @@ FROM alpine:3.13.5
 
 RUN set -x \
     && apk update \
-    && apk --no-cache add \
-    php \
-    php-fpm \
-    php-pdo \
-    php7-mysqli
+    && apk add --no-cache \
+    php7 \
+    php7-fpm \
+    php7-pdo_mysql \
+    php7-mysqli \
+    php7-mbstring
 
 COPY ./conf/www.conf /etc/php7/php-fpm.d/www.conf
 RUN chmod +r /etc/php7/php-fpm.d/www.conf
-
-RUN mkdir /run/php/
 
 EXPOSE 9000
 EXPOSE 3306

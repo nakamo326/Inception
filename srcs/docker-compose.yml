@@ -10,6 +10,7 @@ services:
             - "443:443"
         volumes:
             - ./requirements/wordpress/wp_site:/var/www/html
+
     wordpress:
         build:
             context: ./requirements/wordpress
@@ -18,10 +19,11 @@ services:
             - mariadb
         volumes:
             - ./requirements/wordpress/wp_site:/var/www/html
+
     mariadb:
         build:
             context: ./requirements/mariadb
-        init: True
         container_name: mariadb
+        hostname: mariadb
         # volumes:
         #     - ./requirements/mariadb/db:/var/lib/mysql

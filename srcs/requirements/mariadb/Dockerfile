@@ -1,21 +1,23 @@
-FROM debian:buster
+FROM alpine:3.13.5
 
 WORKDIR /tmp/
 
+
 RUN set -x \
-    && apt-get update \
-    && apt-get install -y \
-    mariadb-server \
+    && apk update \
+    && apk add --no-cache \
+    mariadb \
+    mariadb-client \
     tini
 
 COPY ./conf/init.sql /tmp/init.sql
 
-RUN service mysql start \
-    && mysql -u root < init.sql
+# RUN service mysql start \
+    # && mysql -u root < init.sql
 
-EXPOSE 3306
+# EXPOSE 3306
 
-ENTRYPOINT ["/usr/bin/tini", "--"]
+# ENTRYPOINT ["/usr/bin/tini", "--"]
 
-CMD [ "mysqld_safe" ]
+# CMD [ "mysqld_safe" ]
 #CMD [ "service", "mysql", "start" ]

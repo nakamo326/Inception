@@ -4,7 +4,7 @@ WORKDIR /tmp/
 
 RUN set -x \
     && apk update \
-    && apk --no-cache add \
+    && apk add --no-cache \
     nginx \
     openssl
 
