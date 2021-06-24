@@ -5,6 +5,7 @@ RUN set -x \
     && apk add --no-cache \
     php7 \
     php7-fpm \
+    php7-json \
     php7-pdo_mysql \
     php7-mysqli \
     php7-mbstring \
@@ -12,6 +13,8 @@ RUN set -x \
 
 COPY ./conf/www.conf /etc/php7/php-fpm.d/www.conf
 RUN chmod +r /etc/php7/php-fpm.d/www.conf
+COPY ./conf/php.ini /etc/php7/php.ini
+RUN chmod +r /etc/php7/php.ini
 
 EXPOSE 9000
 EXPOSE 3306
