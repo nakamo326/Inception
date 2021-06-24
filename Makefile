@@ -1,5 +1,5 @@
 NAME = inception
-LOGIN = ynakamot.42.fr
+DOMAIN = ynakamot.42.fr
 
 SRCDIRS = ./srcs
 YML = ./srcs/docker-compose.yml
@@ -7,16 +7,27 @@ YML = ./srcs/docker-compose.yml
 all: $(NAME)
 
 $(NAME):
-	docker-compose -f $(YML) up -d --build
+	docker-compose -f $(YML) up -d
 
 down:
 	docker-compose -f $(YML) down
 
-set_up: add_host
+set_up: volume add_host #extract_wp
+	docker-compose -f $(YML) up -d --build
 
+volume:
+	mkdir -p /home/ynakamot/data/mariadb
+	mkdir -p /home/ynakamot/data/wordpress
 
 add_host:
-	echo "127.0.0.1 $(LOGIN)" >> /etc/hosts
+	echo "127.0.0.1 $(DOMAIN)" >> /etc/hosts
+
+extract_wp:
+	curl https://ja.wordpress.org/latest-ja.zip -o wp_site.zip
+	unzip wp_site.zip
+	cp -r wordpress/* /home/ynakamot/data/wordpress
+	rm -rf wp_site.zip wordpress
+	cp srcs/requirements/wordpress/conf/wp-config.php /home/ynakamot/data/wordpress/wp-config.php
 
 clean:
 

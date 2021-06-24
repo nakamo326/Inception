@@ -13,8 +13,8 @@ services:
             - "443:443"
         networks:
             - network
-        volumes: #need to change /home/login/data
-            - ./requirements/wordpress/wp_site:/var/www/html
+        volumes:
+            - /home/ynakamot/data/wordpress:/var/www/html
 
     wordpress:
         build:
@@ -25,8 +25,8 @@ services:
             - mariadb
         networks:
             - network
-        volumes: #need to change /home/login/data
-            - ./requirements/wordpress/wp_site:/var/www/html
+        volumes:
+            - /home/ynakamot/data/wordpress:/var/www/html
 
     mariadb:
         build:
@@ -42,8 +42,8 @@ services:
             MYSQL_COLLATION: ${MYSQL_COLLATION}
         networks:
             - network
-        volumes: #need to change /home/login/data
-            - ./requirements/mariadb/db:/var/lib/mysql
+        volumes:
+            - /home/ynakamot/data/mariadb:/var/lib/mysql
 
 networks:
     network:
