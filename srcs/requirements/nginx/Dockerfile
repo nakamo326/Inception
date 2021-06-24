@@ -19,8 +19,12 @@ RUN openssl req -newkey rsa:4096 \
     -keyout server.key \
     -subj "/C=JP/ST=tokyo/L=tokyo/O=42tokyo/OU=IT Department/CN=ynakamot"
 
-COPY conf/nginx.conf /etc/nginx/conf.d/default.conf
-RUN chmod +r /etc/nginx/conf.d/default.conf \
+ARG DOMAIN_NAME
+ENV DOMAIN_NAME=/${DOMAIN_NAME}
+
+COPY conf/tmpl.conf /tmp/tmpl.conf
+RUN eval "echo \"$(cat ./tmpl.conf)\"" > /etc/nginx/conf.d/default.conf \
+    && chmod +r /etc/nginx/conf.d/default.conf \
     && mkdir /run/nginx
 
 EXPOSE 9000
