@@ -1,4 +1,3 @@
-#need to change tag
 #confirm restart setting
 
 version: "3.8"
@@ -8,6 +7,7 @@ services:
             context: ./requirements/nginx
             args:
                 DOMAIN_NAME: ${DOMAIN_NAME}
+        image: nginx:ynakamot
         container_name: nginx
         restart: always
         depends_on:
@@ -22,6 +22,7 @@ services:
     wordpress:
         build:
             context: ./requirements/wordpress
+        image: wordpress:ynakamot
         container_name: wordpress
         restart: always
         environment:
@@ -38,6 +39,7 @@ services:
     mariadb:
         build:
             context: ./requirements/mariadb
+        image: mariadb:ynakamot
         container_name: mariadb
         restart: always
         environment:
