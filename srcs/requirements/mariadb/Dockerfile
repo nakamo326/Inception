@@ -8,7 +8,7 @@ RUN set -x \
     mariadb-server-utils \
     && rm -f /var/cache/apk/*
 
-COPY ./conf/run.sh /scripts/run.sh
+COPY ./tools/run.sh /scripts/run.sh
 RUN chmod -R 755 /scripts
 
 EXPOSE 3306

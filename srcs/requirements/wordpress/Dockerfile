@@ -14,7 +14,7 @@ RUN set -x \
 COPY ./conf/www.conf /etc/php7/php-fpm.d/www.conf
 COPY ./conf/php.ini /etc/php7/php.ini
 COPY ./conf/wp-conf-tmpl.php /tmp/wp-conf-tmpl.php
-COPY ./conf/run.sh /scripts/run.sh
+COPY ./tools/run.sh /scripts/run.sh
 RUN chmod +r /etc/php7/php-fpm.d/www.conf \
     && chmod +r /etc/php7/php.ini \
     && chmod +r /tmp/wp-conf-tmpl.php \
