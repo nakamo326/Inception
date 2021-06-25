@@ -5,10 +5,19 @@ RUN set -x \
     && apk add --no-cache \
     php7 \
     php7-fpm \
+    php7-curl \
+    php7-dom \
+    php7-exif \
+    php7-fileinfo \
+    php7-pecl-imagick \
     php7-json \
-    php7-pdo_mysql \
-    php7-mysqli \
     php7-mbstring \
+    php7-mysqli \
+    php7-openssl \
+    php7-sodium \
+    php7-xml \
+    php7-zip \
+    php7-pdo_mysql \
     && rm -f /var/cache/apk/*
 
 COPY ./conf/www.conf /etc/php7/php-fpm.d/www.conf
