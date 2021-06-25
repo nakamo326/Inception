@@ -11,7 +11,6 @@ RUN set -x \
     && rm -f /var/cache/apk/*
 
 ARG DOMAIN_NAME
-ENV DOMAIN_NAME=${DOMAIN_NAME}
 
 RUN wget https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64 -O mkcert \
     && chmod 755 mkcert \
