@@ -1,6 +1,10 @@
-#confirm restart setting
 
 version: "3.8"
+
+networks:
+    network:
+        driver: bridge
+
 services:
     nginx:
         build:
@@ -18,7 +22,6 @@ services:
             - network
         volumes:
             - /home/ynakamot/data/wordpress:/var/www/html
-            - /home/ynakamot/data/document:/var/www/document
 
     wordpress:
         build:
@@ -55,6 +58,11 @@ services:
         volumes:
             - /home/ynakamot/data/mariadb:/var/lib/mysql
 
-networks:
-    network:
-        driver: bridge
+    static_website:
+        build:
+            context: ./requirements/bonus/static_website
+        image: static_website:ynakamot
+        container_name: static_website
+        restart: always
+        networks:
+            - network

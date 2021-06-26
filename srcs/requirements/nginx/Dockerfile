@@ -24,5 +24,6 @@ RUN eval "echo \"$(cat ./tmpl.conf)\"" > /etc/nginx/conf.d/default.conf \
     && mkdir /run/nginx
 
 EXPOSE 9000
+EXPOSE 8888
 
 CMD ["nginx", "-g", "daemon off;"]
