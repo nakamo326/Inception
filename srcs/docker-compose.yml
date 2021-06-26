@@ -18,6 +18,7 @@ services:
             - network
         volumes:
             - /home/ynakamot/data/wordpress:/var/www/html
+            - /home/ynakamot/data/document:/var/www/document
 
     wordpress:
         build:

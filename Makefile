@@ -12,7 +12,7 @@ $(NAME):
 down:
 	docker-compose -f $(YML) down
 
-set_up: volume add_host extract_wp
+set_up: volume add_host extract_wp copy_doc
 	docker-compose -f $(YML) up -d --build
 
 volume:
@@ -27,6 +27,9 @@ extract_wp:
 	unzip wp_site.zip
 	cp -r wordpress/* /home/ynakamot/data/wordpress
 	rm -rf wp_site.zip wordpress
+
+copy_doc:
+	cp -r srcs/requirements/bonus/document /home/ynakamot/data
 
 clean:
 
