@@ -7,6 +7,7 @@ RUN set -x \
     && apk add --no-cache \
     curl \
     php7 \
+    php7-phar \
     php7-fpm \
     php7-curl \
     php7-dom \

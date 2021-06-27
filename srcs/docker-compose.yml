@@ -12,6 +12,12 @@ volumes:
             type : none
             o: bind
             device: /home/ynakamot/data/wordpress
+    mariadb-vol:
+        driver: local
+        driver_opts:
+            type : none
+            o: bind
+            device: /home/ynakamot/data/mariadb
 
 services:
     nginx:
@@ -51,20 +57,20 @@ services:
     mariadb:
         build:
             context: ./requirements/mariadb
+            args:
+                MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+                MYSQL_DATABASE: ${MYSQL_DATABASE}
+                MYSQL_USER: ${MYSQL_USER}
+                MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+                MYSQL_CHARSET: ${MYSQL_CHARSET}
+                MYSQL_COLLATION: ${MYSQL_COLLATION}
         image: mariadb:ynakamot
         container_name: mariadb
         restart: always
-        environment:
-            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-            MYSQL_DATABASE: ${MYSQL_DATABASE}
-            MYSQL_USER: ${MYSQL_USER}
-            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-            MYSQL_CHARSET: ${MYSQL_CHARSET}
-            MYSQL_COLLATION: ${MYSQL_COLLATION}
         networks:
             - network
         volumes:
-            - /home/ynakamot/data/mariadb:/var/lib/mysql
+            - mariadb-vol:/var/lib/mysql
 
     static_website:
         build:

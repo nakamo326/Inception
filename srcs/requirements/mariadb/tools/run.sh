@@ -22,4 +22,4 @@ EOF
 /usr/bin/mysqld --user=mysql --bootstrap --verbose=0 --skip-name-resolve --skip-networking=0 < tmp.sql
 rm -f tmp.sql
 
-exec /usr/bin/mysqld --user=mysql --console --skip-name-resolve --skip-networking=0 $@
+# exec /usr/bin/mysqld --user=mysql --console --skip-name-resolve --skip-networking=0 $@

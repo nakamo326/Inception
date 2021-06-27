@@ -8,9 +8,19 @@ RUN set -x \
     mariadb-server-utils \
     && rm -f /var/cache/apk/*
 
-COPY ./tools/run.sh /scripts/run.sh
-RUN chmod -R 755 /scripts
+WORKDIR /tmp/
+
+ARG MYSQL_ROOT_PASSWORD
+ARG MYSQL_DATABASE
+ARG MYSQL_USER
+ARG MYSQL_PASSWORD
+ARG MYSQL_CHARSET
+ARG MYSQL_COLLATION
+
+COPY ./tools/run.sh /tmp/init.sh
+RUN chmod 755 /tmp/init.sh \
+    && /tmp/init.sh
 
 EXPOSE 3306
 
-ENTRYPOINT [ "/scripts/run.sh" ]
+ENTRYPOINT [ "/usr/bin/mysqld", "--user=mysql", "--console", "--skip-name-resolve", "--skip-networking=0" ]
