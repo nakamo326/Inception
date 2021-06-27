@@ -19,7 +19,6 @@ volume:
 # need to be root
 add_host:
 	echo "127.0.0.1 $(DOMAIN)" >> /etc/hosts
-extract_wp:
 ...
 ```
 
