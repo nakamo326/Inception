@@ -16,24 +16,20 @@ RUN set -x \
 ARG MYSQL_DATABASE
 ARG MYSQL_USER
 ARG MYSQL_PASSWORD
-ARG ADMIN_USER
-ARG ADMIN_MAIL
-ARG ADMIN_PASS
-ARG AUTHOR_USER
-ARG AUTHOR_MAIL
-ARG AUTHOR_PASS
 
 COPY ./conf/www.conf /etc/php7/php-fpm.d/www.conf
 COPY ./conf/php.ini /etc/php7/php.ini
-COPY ./conf/wp-conf-tmpl.php /tmp/wp-conf-tmpl.php
 COPY ./tools/init_wp.sh /tmp/init_wp.sh
+COPY ./tools/run.sh /scripts/run.sh
 RUN chmod +r /etc/php7/php-fpm.d/www.conf \
     && chmod +r /etc/php7/php.ini \
     && chmod +x /tmp/init_wp.sh \
-    && sh init_wp.sh
+    && chmod -R 755 /scripts
+
+RUN sh /tmp/init_wp.sh
 
 
 EXPOSE 9000
 EXPOSE 3306
 
-CMD [ "php-fpm7", "-F", "-R" ]
+CMD [ "sh", "/scripts/run.sh" ]

@@ -44,15 +44,17 @@ services:
                 MYSQL_DATABASE: ${MYSQL_DATABASE}
                 MYSQL_USER: ${MYSQL_USER}
                 MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-                ADMIN_USER: ${ADMIN_USER}
-                ADMIN_MAIL: ${ADMIN_MAIL}
-                ADMIN_PASS: ${ADMIN_PASS}
-                AUTHOR_USER: ${AUTHOR_USER}
-                AUTHOR_MAIL: ${AUTHOR_MAIL}
-                AUTHOR_PASS: ${AUTHOR_PASS}
         image: wordpress:ynakamot
         container_name: wordpress
         restart: always
+        environment:
+            ADMIN_USER: ${ADMIN_USER}
+            ADMIN_MAIL: ${ADMIN_MAIL}
+            ADMIN_PASS: ${ADMIN_PASS}
+            AUTHOR_USER: ${AUTHOR_USER}
+            AUTHOR_MAIL: ${AUTHOR_MAIL}
+            AUTHOR_PASS: ${AUTHOR_PASS}
+            DOMAIN_NAME: ${DOMAIN_NAME}
         depends_on:
             - mariadb
         networks:

@@ -21,3 +21,7 @@ volume:
 
 add_host:
 	echo "127.0.0.1 $(DOMAIN)" >> /etc/hosts
+
+reset:
+	docker volume rm inception_wordpress-vol inception_mariadb-vol
+	rm -rf /home/ynakamot/data
