@@ -1,9 +1,17 @@
 
-version: "3.8"
+version: "3"
 
 networks:
     network:
         driver: bridge
+
+volumes:
+    wordpress-vol:
+        driver: local
+        driver_opts:
+            type : none
+            o: bind
+            device: /home/ynakamot/data/wordpress
 
 services:
     nginx:
@@ -21,24 +29,24 @@ services:
         networks:
             - network
         volumes:
-            - /home/ynakamot/data/wordpress:/var/www/html
+            - wordpress-vol:/var/www/html
 
     wordpress:
         build:
             context: ./requirements/wordpress
+            args:
+                MYSQL_DATABASE: ${MYSQL_DATABASE}
+                MYSQL_USER: ${MYSQL_USER}
+                MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         image: wordpress:ynakamot
         container_name: wordpress
         restart: always
-        environment:
-            MYSQL_DATABASE: ${MYSQL_DATABASE}
-            MYSQL_USER: ${MYSQL_USER}
-            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         depends_on:
             - mariadb
         networks:
             - network
         volumes:
-            - /home/ynakamot/data/wordpress:/var/www/html
+            - wordpress-vol:/var/www/html
 
     mariadb:
         build:
