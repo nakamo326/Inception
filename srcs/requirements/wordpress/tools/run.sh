@@ -18,4 +18,10 @@ if [ $? -ne 0 ]; then
     wp user create $AUTHOR_USER $AUTHOR_MAIL --user_pass=$AUTHOR_PASS --role=author
 fi
 
+wp plugin is-installed redis
+if [ $? -ne 0 ]; then
+    wp plugin install redis-cache --activate
+    wp redis enable
+fi
+
 exec php-fpm7 -F -R
