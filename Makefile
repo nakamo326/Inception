@@ -1,13 +1,15 @@
 NAME = inception
 DOMAIN = ynakamot.42.fr
 
-SRCDIRS = ./srcs
 YML = ./srcs/docker-compose.yml
 
 all: $(NAME)
 
 $(NAME):
 	docker-compose -f $(YML) up -d
+
+stop:
+	docker-compose -f $(YML) stop
 
 down:
 	docker-compose -f $(YML) down
