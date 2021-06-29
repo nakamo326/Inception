@@ -18,6 +18,7 @@ volume:
 
 # need to be root
 add_host:
+	cp /etc/hosts /etc/hosts.bak
 	echo "127.0.0.1 $(DOMAIN)" >> /etc/hosts
 ...
 ```
