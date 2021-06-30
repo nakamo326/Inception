@@ -103,3 +103,12 @@ services:
         restart: always
         networks:
             - redis-network
+
+    adminer:
+        build:
+            context: ./requirements/bonus/adminer
+        image: adminer:ynakamot
+        container_name: adminer
+        restart: always
+        networks:
+            - network
