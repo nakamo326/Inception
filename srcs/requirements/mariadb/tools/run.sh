@@ -16,10 +16,11 @@ SET PASSWORD FOR 'root'@'localhost'=PASSWORD('${MYSQL_ROOT_PASSWORD}') ;
 DROP DATABASE IF EXISTS test ;
 CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE CHARACTER SET $MYSQL_CHARSET COLLATE $MYSQL_COLLATION;
 GRANT ALL ON $MYSQL_DATABASE.* to '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';
+GRANT ALL ON $MYSQL_DATABASE.* to '$MYSQL_USER'@'localhost' IDENTIFIED BY '$MYSQL_PASSWORD';
 FLUSH PRIVILEGES ;
 EOF
+# is shouldn't add all grant to 'root'@'%'
+
 
 /usr/bin/mysqld --user=mysql --bootstrap --verbose=0 --skip-name-resolve --skip-networking=0 < tmp.sql
 rm -f tmp.sql
-
-# exec /usr/bin/mysqld --user=mysql --console --skip-name-resolve --skip-networking=0 $@
