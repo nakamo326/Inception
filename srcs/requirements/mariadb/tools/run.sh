@@ -19,7 +19,7 @@ GRANT ALL ON $MYSQL_DATABASE.* to '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWO
 GRANT ALL ON $MYSQL_DATABASE.* to '$MYSQL_USER'@'localhost' IDENTIFIED BY '$MYSQL_PASSWORD';
 FLUSH PRIVILEGES ;
 EOF
-# is shouldn't add all grant to 'root'@'%'
+# shouldn't add all grant to 'root'@'%'
 
 
 /usr/bin/mysqld --user=mysql --bootstrap --verbose=0 --skip-name-resolve --skip-networking=0 < tmp.sql
