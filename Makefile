@@ -14,6 +14,9 @@ stop:
 down:
 	docker-compose -f $(YML) down
 
+build:
+	docker-compose -f $(YML) up -d --build
+
 set_up: volume add_host
 	docker-compose -f $(YML) up -d --build
 
